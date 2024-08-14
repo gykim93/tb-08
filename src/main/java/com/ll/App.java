@@ -23,6 +23,9 @@ class App {
                 String authorName = scanner.nextLine();
 
                 lastQuotationid++;
+
+                int id = lastQuotationid;
+                Quotation quotation = new Quotation(id, content,authorName);
                 System.out.printf("%d번 명언이 등록되었습니다.\n", lastQuotationid);
             }
         }
