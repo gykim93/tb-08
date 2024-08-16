@@ -8,11 +8,13 @@ class App {
     Scanner scanner;
     int lastQuotationid;
     List<Quotation> quotations;
-    App(){
+
+    App() {
         lastQuotationid = 0;
         scanner = new Scanner(System.in);
         quotations = new ArrayList<>();
     }
+
     void run() {
         System.out.println("== 명언 앱 ==");
 
@@ -62,9 +64,27 @@ class App {
         }
     }
 
-    void actionRemove(String cmd){
-        String idStr = cmd.replace("삭제?id=",""); //"삭제?id=1", "삭제?id=" 이 부분을 빈 문자열로 대체, ID
-        int id = Integer.parseInt(idStr);
-        System.out.printf("%d번 명언을 삭제합니다\n", id);
+    void actionRemove(String cmd) {
+        String[] cmdBits = cmd.split("\\?", 2);
+        String action = cmdBits[0];
+        String queryString = cmdBits[1];
+
+        String[] queryStringBits = queryString.split("&");
+        // queryStringBtis[0] id=1
+        // queryStringBtis[1] archive=true
+
+        int id = 0;
+
+        for (int i = 0; i < queryStringBits.length; i++){
+            String queryParamStr = queryStringBits[i];
+            String[] queryParamStrBits = queryParamStr.split("=", 2);
+            String paramName = queryParamStrBits[0];
+            String paramValue = queryParamStrBits[1];
+
+            if (paramName.equals("id")){
+                id = Integer.parseInt(paramValue); // 문자열을 정수로 변환
+            }
+        }
+            System.out.printf("%d번 명언을 삭제합니다\n", id);
     }
 }
