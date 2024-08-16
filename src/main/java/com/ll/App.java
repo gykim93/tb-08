@@ -65,9 +65,9 @@ class App {
     }
 
     void actionRemove(String cmd) {
-        String[] cmdBits = cmd.split("\\?", 2);
-        String action = cmdBits[0];
-        String queryString = cmdBits[1];
+        String[] cmdBits = cmd.split("\\?", 2); //cmd에 삭제?id=1&archive=true
+        String action = cmdBits[0]; // 삭제
+        String queryString = cmdBits[1]; // id=1&archive=true
 
         String[] queryStringBits = queryString.split("&");
         // queryStringBtis[0] id=1
@@ -78,8 +78,8 @@ class App {
         for (int i = 0; i < queryStringBits.length; i++){
             String queryParamStr = queryStringBits[i];
             String[] queryParamStrBits = queryParamStr.split("=", 2);
-            String paramName = queryParamStrBits[0];
-            String paramValue = queryParamStrBits[1];
+            String paramName = queryParamStrBits[0]; // id
+            String paramValue = queryParamStrBits[1];// 1
 
             if (paramName.equals("id")){
                 id = Integer.parseInt(paramValue); // 문자열을 정수로 변환
