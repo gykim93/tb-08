@@ -29,6 +29,8 @@ class App {
 
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if (cmd.startsWith("삭제?")) {
+                actionRemove(cmd);
             }
         }
     }
@@ -58,5 +60,11 @@ class App {
             Quotation quotation = quotations.get(i);
             System.out.printf("%d / %s / %s\n", quotation.id, quotation.authorName, quotation.content);
         }
+    }
+
+    void actionRemove(String cmd){
+        String idStr = cmd.replace("삭제?id=",""); //"삭제?id=1", "삭제?id=" 이 부분을 빈 문자열로 대체, ID
+        int id = Integer.parseInt(idStr);
+        System.out.printf("%d번 명언을 삭제합니다\n", id);
     }
 }
