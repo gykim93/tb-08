@@ -18,13 +18,7 @@ public class App {
 
     void initTestData() {
         for (int i = 0; i < 10; i++) {
-            lastQuotationId++;
-            int id = lastQuotationId;
-            String content = "명언" + id;
-            String authorName = "작가" + id;
-
-            Quotation quotation = new Quotation(id, content, authorName);
-            quotations.add(quotation);
+            write("명언" + i, "작가" + i);
         }
     }
 
@@ -56,6 +50,15 @@ public class App {
             }
         }
     }
+    private Quotation write(String content, String authorName){
+        lastQuotationId++;
+        int id = lastQuotationId;
+
+        Quotation quotation = new Quotation(id, content, authorName);
+        quotations.add(quotation);
+
+        return quotation;
+    }
 
     private void actionWrite() {
         System.out.print("명언 : ");
@@ -64,13 +67,9 @@ public class App {
         System.out.print("작가 : ");
         String authorName = scanner.nextLine();
 
-        lastQuotationId++;
-        int id = lastQuotationId;
+        Quotation quotation = write(content, authorName);
 
-        Quotation quotation = new Quotation(id, content, authorName);
-        quotations.add(quotation);
-
-        System.out.printf("%d번 명언이 등록되었습니다.\n", lastQuotationId);
+        System.out.printf("%d번 명언이 등록되었습니다.\n", quotation.getId());
     }
 
     private void actionList() {
